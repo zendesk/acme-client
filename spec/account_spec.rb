@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe Acme::Client::Resources::Account do
+describe AcmeV2::Client::Resources::Account do
   let(:private_key) { generate_private_key }
   let(:unregistered_client) do
-    client = Acme::Client.new(private_key: private_key, directory: DIRECTORY_URL)
+    client = AcmeV2::Client.new(private_key: private_key, directory: DIRECTORY_URL)
     client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
     client
   end
   let(:client) do
-    client = Acme::Client.new(private_key: private_key, directory: DIRECTORY_URL)
+    client = AcmeV2::Client.new(private_key: private_key, directory: DIRECTORY_URL)
     client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
     client
   end

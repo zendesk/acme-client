@@ -1,4 +1,4 @@
-class Acme::Client::JWK::ECDSA < Acme::Client::JWK::Base
+class AcmeV2::Client::JWK::ECDSA < AcmeV2::Client::JWK::Base
   # JWA parameters for supported OpenSSL curves.
   # https://tools.ietf.org/html/rfc7518#section-3.1
   KNOWN_CURVES = {
@@ -50,8 +50,8 @@ class Acme::Client::JWK::ECDSA < Acme::Client::JWK::Base
     {
       crv: @curve_params[:jwa_crv],
       kty: 'EC',
-      x: Acme::Client::Util.urlsafe_base64(coordinates[:x].to_s(2)),
-      y: Acme::Client::Util.urlsafe_base64(coordinates[:y].to_s(2))
+      x: AcmeV2::Client::Util.urlsafe_base64(coordinates[:x].to_s(2)),
+      y: AcmeV2::Client::Util.urlsafe_base64(coordinates[:y].to_s(2))
     }
   end
 

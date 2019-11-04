@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Acme::Client::Resources::Challenges::DNS01 < Acme::Client::Resources::Challenges::Base
+class AcmeV2::Client::Resources::Challenges::DNS01 < AcmeV2::Client::Resources::Challenges::Base
   CHALLENGE_TYPE = 'dns-01'.freeze
   RECORD_NAME = '_acme-challenge'.freeze
   RECORD_TYPE = 'TXT'.freeze
@@ -15,6 +15,6 @@ class Acme::Client::Resources::Challenges::DNS01 < Acme::Client::Resources::Chal
   end
 
   def record_content
-    Acme::Client::Util.urlsafe_base64(DIGEST.digest(key_authorization))
+    AcmeV2::Client::Util.urlsafe_base64(DIGEST.digest(key_authorization))
   end
 end

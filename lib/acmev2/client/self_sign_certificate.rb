@@ -1,4 +1,4 @@
-class Acme::Client::SelfSignCertificate
+class AcmeV2::Client::SelfSignCertificate
   attr_reader :private_key, :subject_alt_names, :not_before, :not_after
 
   extend Forwardable
@@ -46,7 +46,7 @@ class Acme::Client::SelfSignCertificate
     certificate = OpenSSL::X509::Certificate.new
     certificate.not_before = not_before
     certificate.not_after = not_after
-    Acme::Client::Util.set_public_key(certificate, private_key)
+    AcmeV2::Client::Util.set_public_key(certificate, private_key)
     certificate.version = 2
     certificate.serial = 1
     certificate

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Acme::Client::Resources::Directory do
-  let(:directory) { Acme::Client::Resources::Directory.new(DIRECTORY_URL, {}) }
+describe AcmeV2::Client::Resources::Directory do
+  let(:directory) { AcmeV2::Client::Resources::Directory.new(DIRECTORY_URL, {}) }
 
   context 'endpoint_for', vcr: { cassette_name: 'directory_endpoint_for' } do
     it { expect(directory.endpoint_for(:new_nonce)).to be_a_kind_of(URI) }

@@ -1,14 +1,14 @@
-class Acme::Client::Error < StandardError
-  class Timeout < Acme::Client::Error; end
+class AcmeV2::Client::Error < StandardError
+  class Timeout < AcmeV2::Client::Error; end
 
-  class ClientError < Acme::Client::Error; end
+  class ClientError < AcmeV2::Client::Error; end
   class InvalidDirectory < ClientError; end
   class UnsupportedOperation < ClientError; end
   class UnsupportedChallengeType < ClientError; end
   class NotFound < ClientError; end
   class CertificateNotReady < ClientError; end
 
-  class ServerError < Acme::Client::Error; end
+  class ServerError < AcmeV2::Client::Error; end
   class BadCSR < ServerError; end
   class BadNonce < ServerError; end
   class BadSignatureAlgorithm < ServerError; end

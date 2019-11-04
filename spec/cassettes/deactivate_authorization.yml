@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -39,7 +39,7 @@ http_interactions:
            "newOrder": "<DIRECTORY_BASE_URL>/order-plz",
            "revokeCert": "<DIRECTORY_BASE_URL>/revoke-cert"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:20 GMT
 - request:
     method: head
@@ -49,7 +49,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Accept:
       - "*/*"
   response:
@@ -68,7 +68,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:20 GMT
 - request:
     method: post
@@ -78,7 +78,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIm5vbmNlIjoiY1JtTkkxdjV2WDZhRzhWbXBDRF8zUSIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9zaWduLW1lLXVwIiwiandrIjp7ImUiOiJBUUFCIiwia3R5IjoiUlNBIiwibiI6InFuZFBUaHFEb19VMUhDZ1lMRGk5eVpMT0EyTkZBUmdOeVFhaUw0LUZnOHJzQnlCeFJrMkRoN0ZtN2RMQThpemg3THpXNEoxN3daNkpoSTRtakhCMjZ1UDZ1WG9Ic1E3clZRQlhZbWNKQVp3T3g5ZkJiaGVMQ2Rza1ZFRG1jazZhdU5ZRzRTMjczMTBfN2wwdzdJODhiVjVfdmxyVWVLX0hXQWJ1a1BDQXpYZV9rX2wtaWsyOWt6NnZwMnNKeWwyRVRVVkYwUjhaTThFazVuWG9HcXIybzMweTdZbzhMMEItNTdNckNvQU1WcUZ2UWNwZ25Gc25GQW91enFrLTRIbWNjVC1NODNIU3JOcU9WUjBhbTY2WkMyTm9fdEFIU1JaQnAxc0ZUM3Q4UXkxcU5JVVNkQm5neHpwNEhoY0pyQkdxRTdBOGRJWHJPc2xNT2dIaGV5MFdsUSJ9fQ","payload":"eyJjb250YWN0IjpbIm1haWx0bzppbmZvQGV4YW1wbGUuY29tIl0sInRlcm1zT2ZTZXJ2aWNlQWdyZWVkIjp0cnVlfQ","signature":"ZCdRBNcY7VkDkpH7u-qTwtrUzqooEx2304_sFpSAF5wI3TVRluyPrg4t9b9uM2FPlZ-UWxMFfTZBETAos0LLFUeKX-m2rmk_ibBrL7vyXwUotcJ_aJnrFKUhX5EsYgFN9mrV_WeGqUIvg8H37Qhy55yZrnbwxDtueFVoMMAXQNfjCJs-Ts785IrJzsmNZzGTpNwff_JDbmHjnIQ6cWLPjVIy8a5qLiV9BljcvevVVqqQohbYnZkAuNItELXm9Lbre9edKb5VgElraCY5OwWXJCCenD33DqgYp_iErUs4Rm0CdHAt4WSUuENjKWRInlRb5PJ9kCjEuV7N0UjwgWcyyA"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -119,7 +119,7 @@ http_interactions:
               "e": "AQAB"
            }
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:20 GMT
 - request:
     method: post
@@ -129,7 +129,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIm5vbmNlIjoiLUo5WHFBRFB2MHJiWllIR3lLa3V1QSIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9vcmRlci1wbHoiLCJraWQiOiJodHRwczovLzE5Mi4xNjguNTYuOTM6MTQwMDAvbXktYWNjb3VudC83MCJ9","payload":"eyJpZGVudGlmaWVycyI6W3sidHlwZSI6ImRucyIsInZhbHVlIjoiZXhhbXBsZS5jb20ifV19","signature":"eNbMHcWpNBzEfGKKRJwlj8KLybUo0T3Mz75pQ5UDrXwI6-4LzMGedhZ1o0CEW0-hHpV9hTb330EYudjY7AOioOTyO57FVxeFeSytiI1Rh21Fmb82O33fNuoDEJT6mHmxFs845LPYFKS4yee2SEO5gKp3QARdY4kVY2LXupExsxwfo2XaPF_JqcnZBv28YowW1X8E7voLioPJ7EYHSaACQGOYmbtJQGexl7iFcVx0aW7XVTKL-L8QNSPGYQzIiF07O6Fv5KmVtODArd1DVudysKI14eRQdB51CU1FK8mj8Vsclp_xe_zvwWM24ccfuINLcGngh8RW6zfxNvc_-HocsA"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -172,7 +172,7 @@ http_interactions:
               "<DIRECTORY_BASE_URL>/authZ/cOwur0slMjKUIwN9Q1OJEou8XpmgzBrfVSIhr1afnzE"
            ]
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:20 GMT
 - request:
     method: post
@@ -182,7 +182,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIm5vbmNlIjoiU2xkNk1oNFpzN2xpUU41SU9nWWFuUSIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9hdXRoWi9jT3d1cjBzbE1qS1VJd045UTFPSkVvdThYcG1nekJyZlZTSWhyMWFmbnpFIiwia2lkIjoiaHR0cHM6Ly8xOTIuMTY4LjU2LjkzOjE0MDAwL215LWFjY291bnQvNzAifQ","payload":"","signature":"Z7CUzggysw9d1xyAuV6vI5cq0dd8cvt6dy_b_rJi1UvHmv_4ZkFizbRsPzZCDHJZKPAHWWdckbw15Vb0cwZDrHA3CvkR0RwyGROPX8pzYk1YqzfrJtmuNH6ZvBfPyoi4sBle76tIUwmpfh__7NPMEdOVoFAtrM-xIQyeZBdRy-PpepDXlc6E3V_wnqcUJxBwSIizHkt_nI58kSSGzTRPg43Cy0URQ2bDfo_cEllft776kWRnT6vGa1qDa2Du9aIkbznsLhzOr4YLkbLdX4K0kZo-oUX5L2nl30sX4GI6Vs303smuPZNsWV-MN58MxbdiaMkfkPzrvS_G2SZNaMYSkw"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -237,7 +237,7 @@ http_interactions:
            ],
            "expires": "2019-10-10T04:08:20Z"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:20 GMT
 - request:
     method: post
@@ -247,7 +247,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIm5vbmNlIjoiV2VQVjVRWmlyM2JOS2NTZkhuMU1iUSIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9hdXRoWi9jT3d1cjBzbE1qS1VJd045UTFPSkVvdThYcG1nekJyZlZTSWhyMWFmbnpFIiwia2lkIjoiaHR0cHM6Ly8xOTIuMTY4LjU2LjkzOjE0MDAwL215LWFjY291bnQvNzAifQ","payload":"eyJzdGF0dXMiOiJkZWFjdGl2YXRlZCJ9","signature":"n7GO3YHjQghy8VdtPlQ_OBMloxAEMuJeOl0GkkEuqr4KDW_qUIbrQKTZ0V8yP_roatN27huQ9uIN3IxB4NQFSm_8KDaWDit83MswtS7mVm3GsuRq3OV6RyKhW0T3bfioHT5rPLx-j_yxNsuFwp_y45Ow8JEmmLGm0uAJLRiE1w528_DWE4ztBeJxF6oru6rwX_wSBBP7VjBHWGNO_R3cxe82YA5XjgK-47nXHEkuSXtZzoVoSCGJunEmo7Nsdiqz_owYw0xypXRDU397pUnUNV8IFZ-PmreMRIQBi9FwE8QOY7oQm-UvW-SjyrEla9sAqtD1k1l_9rZyC-owmQDLfQ"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -283,6 +283,6 @@ http_interactions:
            "challenges": [],
            "expires": "2019-10-10T04:08:20Z"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:20 GMT
 recorded_with: VCR 2.9.3

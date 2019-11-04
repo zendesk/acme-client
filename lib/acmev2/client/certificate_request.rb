@@ -1,4 +1,4 @@
-class Acme::Client::CertificateRequest
+class AcmeV2::Client::CertificateRequest
   extend Forwardable
 
   DEFAULT_KEY_LENGTH = 2048
@@ -116,4 +116,4 @@ class Acme::Client::CertificateRequest
   end
 end
 
-require 'acme/client/certificate_request/ec_key_patch'
+require 'acmev2/client/certificate_request/ec_key_patch'

@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -39,7 +39,7 @@ http_interactions:
            "newOrder": "<DIRECTORY_BASE_URL>/order-plz",
            "revokeCert": "<DIRECTORY_BASE_URL>/revoke-cert"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:22 GMT
 - request:
     method: head
@@ -49,7 +49,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Accept:
       - "*/*"
   response:
@@ -68,7 +68,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:22 GMT
 - request:
     method: post
@@ -78,7 +78,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzM4NCIsIm5vbmNlIjoiWjFLQlhraWVDR0V2R1F6TkVaQnNLQSIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9zaWduLW1lLXVwIiwiandrIjp7ImNydiI6IlAtMzg0Iiwia3R5IjoiRUMiLCJ4IjoiVjVWaHhrVHotYkNaTklJc2xrYUY3ZUV1UTFkLWh4RTJoUUlyeTZwWl9vY01zWmYyMklPWE53dHJXOHJPbVFaTyIsInkiOiJNa2dCNkY2R1M0MUtiR2dpRTlVSTROeDdLUmVmY0xlaWZvTlpsZFJRaTdQMUdQY1V0azRtR2ViRFlQTTdEZ0lPIn19","payload":"eyJjb250YWN0IjpbIm1haWx0bzppbmZvQGV4YW1wbGUuY29tIl0sInRlcm1zT2ZTZXJ2aWNlQWdyZWVkIjp0cnVlfQ","signature":"NjWzzv87jKOF0ZsbL6qCdzqEEji7ip-XLnsSdwOH2n9EppdVmwZdweNI1WwcROAbIJcSHN5qwplXIW454oI9lkHzB3GV0bTSLVGcgxBE7jVHlb6CoElqzSSrvCnTylcZ"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -120,7 +120,7 @@ http_interactions:
               "y": "MkgB6F6GS41KbGgiE9UI4Nx7KRefcLeifoNZldRQi7P1GPcUtk4mGebDYPM7DgIO"
            }
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:22 GMT
 - request:
     method: post
@@ -130,7 +130,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzM4NCIsIm5vbmNlIjoiVUVnUEswclFja09HTDMxYWpGNl92USIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9teS1hY2NvdW50Lzc1Iiwia2lkIjoiaHR0cHM6Ly8xOTIuMTY4LjU2LjkzOjE0MDAwL215LWFjY291bnQvNzUifQ","payload":"","signature":"fOKByeKmX9j5VxHiH10UFfp-QcfXU4IsFTYKzJ-4iMqN_OVZ7uBWBZpynM9EzuzOWqo-bbesA8eladGOr9XWn5uOYCOU8bSvatl-exAMWkJTPJ4oAhZvrHD4y7S0Ejm9"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -170,7 +170,7 @@ http_interactions:
               "y": "MkgB6F6GS41KbGgiE9UI4Nx7KRefcLeifoNZldRQi7P1GPcUtk4mGebDYPM7DgIO"
            }
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:22 GMT
 - request:
     method: post
@@ -180,7 +180,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzM4NCIsIm5vbmNlIjoiV3BGelZjSG5ueFFOeUpEdjJUMTdCUSIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9teS1hY2NvdW50Lzc1Iiwia2lkIjoiaHR0cHM6Ly8xOTIuMTY4LjU2LjkzOjE0MDAwL215LWFjY291bnQvNzUifQ","payload":"eyJjb250YWN0IjpbIm1haWx0bzp1cGRhdGVkQGV4YW1wbGUuY29tIl19","signature":"AxHnABRLi0AecBE2Cd49fgm4dMsrcF0fyMP-D29fxP337Hc9lNDqnZReVr3mOc02ezy6gujNaa1qFaMwdCVM4UU9x-EM6x7mlz0sGFGWdbSY55aBfeiRmC7U7Q-nkR2U"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -220,6 +220,6 @@ http_interactions:
               "y": "MkgB6F6GS41KbGgiE9UI4Nx7KRefcLeifoNZldRQi7P1GPcUtk4mGebDYPM7DgIO"
            }
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:22 GMT
 recorded_with: VCR 2.9.3

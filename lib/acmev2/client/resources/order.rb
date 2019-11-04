@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Acme::Client::Resources::Order
+class AcmeV2::Client::Resources::Order
   attr_reader :url, :status, :contact, :finalize_url, :identifiers, :authorization_urls, :expires, :certificate_url
 
   def initialize(client, **arguments)
@@ -28,7 +28,7 @@ class Acme::Client::Resources::Order
     if certificate_url
       @client.certificate(url: certificate_url)
     else
-      raise Acme::Client::Error::CertificateNotReady, 'No certificate_url to collect the order'
+      raise AcmeV2::Client::Error::CertificateNotReady, 'No certificate_url to collect the order'
     end
   end
 

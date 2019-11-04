@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Acme::Client::FaradayMiddleware < Faraday::Middleware
+class AcmeV2::Client::FaradayMiddleware < Faraday::Middleware
   attr_reader :env, :response, :client
 
   CONTENT_TYPE = 'application/jose+json'
@@ -13,7 +13,7 @@ class Acme::Client::FaradayMiddleware < Faraday::Middleware
 
   def call(env)
     @env = env
-    @env[:request_headers]['User-Agent'] = Acme::Client::USER_AGENT
+    @env[:request_headers]['User-Agent'] = AcmeV2::Client::USER_AGENT
     @env[:request_headers]['Content-Type'] = CONTENT_TYPE
 
     if @env.method != :get
@@ -22,7 +22,7 @@ class Acme::Client::FaradayMiddleware < Faraday::Middleware
 
     @app.call(env).on_complete { |response_env| on_complete(response_env) }
   rescue Faraday::TimeoutError, Faraday::ConnectionFailed
-    raise Acme::Client::Error::Timeout
+    raise AcmeV2::Client::Error::Timeout
   end
 
   def on_complete(env)
@@ -47,7 +47,7 @@ class Acme::Client::FaradayMiddleware < Faraday::Middleware
   end
 
   def raise_on_not_found!
-    raise Acme::Client::Error::NotFound, env.url.to_s if env.status == 404
+    raise AcmeV2::Client::Error::NotFound, env.url.to_s if env.status == 404
   end
 
   def raise_on_error!
@@ -63,7 +63,7 @@ class Acme::Client::FaradayMiddleware < Faraday::Middleware
   end
 
   def error_class
-    Acme::Client::Error::ACME_ERRORS.fetch(error_name, Acme::Client::Error)
+    AcmeV2::Client::Error::ACME_ERRORS.fetch(error_name, AcmeV2::Client::Error)
   end
 
   def error_name

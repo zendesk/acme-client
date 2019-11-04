@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Acme::Client::Resources::Account
+class AcmeV2::Client::Resources::Account
   attr_reader :url, :status, :contact, :term_of_service, :orders_url
 
   def initialize(client, **arguments)

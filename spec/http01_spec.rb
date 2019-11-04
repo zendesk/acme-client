@@ -2,16 +2,16 @@
 
 require 'spec_helper'
 
-describe Acme::Client::Resources::Challenges::HTTP01 do
+describe AcmeV2::Client::Resources::Challenges::HTTP01 do
   let(:private_key) { generate_private_key }
   let(:client) do
-    Acme::Client.new(private_key: private_key, directory: DIRECTORY_URL)
+    AcmeV2::Client.new(private_key: private_key, directory: DIRECTORY_URL)
   end
   let(:attributes) do
     { status: 'pending', url: 'https://example.com/foo/bar', token: 'example_token' }
   end
   let(:http01) do
-    Acme::Client::Resources::Challenges::HTTP01.new(client, **attributes)
+    AcmeV2::Client::Resources::Challenges::HTTP01.new(client, **attributes)
   end
 
   context 'file_content' do

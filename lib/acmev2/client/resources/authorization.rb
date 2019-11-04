@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Acme::Client::Resources::Authorization
+class AcmeV2::Client::Resources::Authorization
   attr_reader :url, :identifier, :domain, :expires, :status, :wildcard
 
   def initialize(client, **arguments)
@@ -26,14 +26,14 @@ class Acme::Client::Resources::Authorization
 
   def http01
     @http01 ||= challenges.find { |challenge|
-      challenge.is_a?(Acme::Client::Resources::Challenges::HTTP01)
+      challenge.is_a?(AcmeV2::Client::Resources::Challenges::HTTP01)
     }
   end
   alias_method :http, :http01
 
   def dns01
     @dns01 ||= challenges.find { |challenge|
-      challenge.is_a?(Acme::Client::Resources::Challenges::DNS01)
+      challenge.is_a?(AcmeV2::Client::Resources::Challenges::DNS01)
     }
   end
   alias_method :dns, :dns01
@@ -59,7 +59,7 @@ class Acme::Client::Resources::Authorization
       token: attributes.fetch('token'),
       error: attributes['error']
     }
-    Acme::Client::Resources::Challenges.new(@client, **arguments)
+    AcmeV2::Client::Resources::Challenges.new(@client, **arguments)
   end
 
   def assign_attributes(url:, status:, expires:, challenges:, identifier:, wildcard: false)

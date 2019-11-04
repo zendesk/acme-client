@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Acme::Client::JWK do
+describe AcmeV2::Client::JWK do
   let(:private_key) { generate_key(key_class) }
 
   subject { described_class.new(private_key) }

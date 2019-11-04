@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe Acme::Client do
+describe AcmeV2::Client do
   let(:private_key) { generate_private_key }
-  let(:csr) { Acme::Client::CertificateRequest.new(names: %w[example.com]) }
+  let(:csr) { AcmeV2::Client::CertificateRequest.new(names: %w[example.com]) }
 
   let(:order) do
     client.new_order(identifiers: [{ type: 'dns', value: 'example.com' }])
   end
 
-  let(:unregistered_client) { Acme::Client.new(private_key: private_key, directory: DIRECTORY_URL) }
+  let(:unregistered_client) { AcmeV2::Client.new(private_key: private_key, directory: DIRECTORY_URL) }
   let(:client) do
-    client = Acme::Client.new(private_key: private_key, directory: DIRECTORY_URL)
+    client = AcmeV2::Client.new(private_key: private_key, directory: DIRECTORY_URL)
     client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
     client
   end
@@ -27,11 +27,11 @@ describe Acme::Client do
     it 'raise when nonce fail', vcr: { cassette_name: 'nonce_fail' } do
       expect {
         unregistered_client.new_account(contact: 'mailto:info@example.com')
-      }.to raise_error(Acme::Client::Error::BadNonce)
+      }.to raise_error(AcmeV2::Client::Error::BadNonce)
     end
 
     it 'retry on bad nonce with bad_nonce_retry option', vcr: { cassette_name: 'nonce_retry' } do
-      client = Acme::Client.new(private_key: private_key, bad_nonce_retry: 10, directory: DIRECTORY_URL)
+      client = AcmeV2::Client.new(private_key: private_key, bad_nonce_retry: 10, directory: DIRECTORY_URL)
       client.nonces << 'invalid_nonce'
       client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
     end
@@ -53,7 +53,7 @@ describe Acme::Client do
       it 'refuse the terms of service', vcr: { cassette_name: 'new_account_refuse_terms' } do
         expect {
           unregistered_client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: false)
-        }.to raise_error(Acme::Client::Error, 'Provided account did not agree to the terms of service')
+        }.to raise_error(AcmeV2::Client::Error, 'Provided account did not agree to the terms of service')
       end
     end
 
@@ -61,7 +61,7 @@ describe Acme::Client do
       let(:kid) { client.kid }
 
       it 'load account when kid is known', vcr: { cassette_name: 'load_account_valid_kid' } do
-        client = Acme::Client.new(
+        client = AcmeV2::Client.new(
           private_key: private_key,
           directory: DIRECTORY_URL,
           kid: kid
@@ -72,7 +72,7 @@ describe Acme::Client do
 
       it 'load account from private key if the kid is unknown', vcr: { cassette_name: 'load_account_unkown_kid' } do
         account = unregistered_client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
-        client = Acme::Client.new(
+        client = AcmeV2::Client.new(
           private_key: private_key,
           directory: DIRECTORY_URL
         )
@@ -111,13 +111,13 @@ describe Acme::Client do
       it 'creates a new order', vcr: { cassette_name: 'new_order' } do
         order = client.new_order(identifiers: [{ type: 'dns', value: 'example.com' }])
 
-        expect(order).to be_a(Acme::Client::Resources::Order)
+        expect(order).to be_a(AcmeV2::Client::Resources::Order)
       end
 
       it 'creates a new order', vcr: { cassette_name: 'simpler_identifiers_order' } do
         order = client.new_order(identifiers: 'example.com')
 
-        expect(order).to be_a(Acme::Client::Resources::Order)
+        expect(order).to be_a(AcmeV2::Client::Resources::Order)
       end
     end
 
@@ -125,20 +125,20 @@ describe Acme::Client do
       let(:order_url) { order.url }
       it 'fetch orders from a url', vcr: { cassette_name: 'fetch_order' } do
         order = client.order(url: order_url)
-        expect(order).to be_a(Acme::Client::Resources::Order)
+        expect(order).to be_a(AcmeV2::Client::Resources::Order)
       end
 
       it 'fail to fetch order from an invalid url', vcr: { cassette_name: 'fail_fetch_order' } do
         expect {
           client.order(url: "#{order_url}err")
-        }.to raise_error(Acme::Client::Error::NotFound)
+        }.to raise_error(AcmeV2::Client::Error::NotFound)
       end
     end
 
     context 'authorization' do
       it 'fetch authorization from a url', vcr: { cassette_name: 'fetch_authorization' } do
         authorization = client.authorization(url: order.authorization_urls.first)
-        expect(authorization).to be_a(Acme::Client::Resources::Authorization)
+        expect(authorization).to be_a(AcmeV2::Client::Resources::Authorization)
       end
     end
 
@@ -147,7 +147,7 @@ describe Acme::Client do
         authorization = client.authorization(url: order.authorization_urls.first)
         authorization = client.deactivate_authorization(url: authorization.url)
 
-        expect(authorization).to be_a(Acme::Client::Resources::Authorization)
+        expect(authorization).to be_a(AcmeV2::Client::Resources::Authorization)
         expect(authorization.status).to eq('deactivated')
       end
     end
@@ -157,7 +157,7 @@ describe Acme::Client do
         authorization = client.authorization(url: order.authorization_urls.first)
         challenge = client.challenge(url: authorization.http01.url)
 
-        expect(challenge).to be_kind_of(Acme::Client::Resources::Challenges::Base)
+        expect(challenge).to be_kind_of(AcmeV2::Client::Resources::Challenges::Base)
       end
     end
 
@@ -167,7 +167,7 @@ describe Acme::Client do
         challenge = client.challenge(url: authorization.http01.url)
         challenge = client.request_challenge_validation(url: challenge.url)
 
-        expect(challenge).to be_kind_of(Acme::Client::Resources::Challenges::Base)
+        expect(challenge).to be_kind_of(AcmeV2::Client::Resources::Challenges::Base)
         expect(challenge.status).to eq('pending')
       end
 
@@ -176,7 +176,7 @@ describe Acme::Client do
         challenge = client.challenge(url: authorization.http01.url)
         challenge = client.request_challenge_validation(url: challenge.url)
 
-        expect(challenge).to be_kind_of(Acme::Client::Resources::Challenges::Base)
+        expect(challenge).to be_kind_of(AcmeV2::Client::Resources::Challenges::Base)
         expect(challenge.status).to eq('pending')
       end
     end
@@ -189,13 +189,13 @@ describe Acme::Client do
       it 'finalize an order raise on csr mismatch', vcr: { cassette_name: 'finalize_csr_mismatch' } do
         expect {
           client.finalize(url: finalize_url, csr: csr)
-        }.to raise_error(Acme::Client::Error::Unauthorized)
+        }.to raise_error(AcmeV2::Client::Error::Unauthorized)
       end
 
       it 'finalize an order raise on incomplete authorization', vcr: { cassette_name: 'finalize_incomplete_challenge' } do
         expect {
           client.finalize(url: finalize_url, csr: csr)
-        }.to raise_error(Acme::Client::Error::Unauthorized)
+        }.to raise_error(AcmeV2::Client::Error::Unauthorized)
       end
 
       it 'finalize an order successfully when authorization challenges are completed', vcr: { cassette_name: 'finalize_succeed' } do

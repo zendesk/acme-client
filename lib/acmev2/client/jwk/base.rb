@@ -1,4 +1,4 @@
-class Acme::Client::JWK::Base
+class AcmeV2::Client::JWK::Base
   THUMBPRINT_DIGEST = OpenSSL::Digest::SHA256
 
   # Initialize a new JWK.
@@ -16,12 +16,12 @@ class Acme::Client::JWK::Base
   # Returns a JSON String.
   def jws(header: {}, payload:)
     header = jws_header(header)
-    encoded_header = Acme::Client::Util.urlsafe_base64(header.to_json)
-    encoded_payload = Acme::Client::Util.urlsafe_base64(payload.nil? ? '' : payload.to_json)
+    encoded_header = AcmeV2::Client::Util.urlsafe_base64(header.to_json)
+    encoded_payload = AcmeV2::Client::Util.urlsafe_base64(payload.nil? ? '' : payload.to_json)
 
     signature_data = "#{encoded_header}.#{encoded_payload}"
     signature = sign(signature_data)
-    encoded_signature = Acme::Client::Util.urlsafe_base64(signature)
+    encoded_signature = AcmeV2::Client::Util.urlsafe_base64(signature)
 
     {
       protected: encoded_header,
@@ -48,7 +48,7 @@ class Acme::Client::JWK::Base
   #
   # Returns a String.
   def thumbprint
-    Acme::Client::Util.urlsafe_base64(THUMBPRINT_DIGEST.digest(to_json))
+    AcmeV2::Client::Util.urlsafe_base64(THUMBPRINT_DIGEST.digest(to_json))
   end
 
   # Header fields for a JSON web signature.

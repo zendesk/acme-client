@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -39,7 +39,7 @@ http_interactions:
            "newOrder": "<DIRECTORY_BASE_URL>/order-plz",
            "revokeCert": "<DIRECTORY_BASE_URL>/revoke-cert"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:14 GMT
 - request:
     method: head
@@ -49,7 +49,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Accept:
       - "*/*"
   response:
@@ -68,7 +68,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:14 GMT
 - request:
     method: post
@@ -78,7 +78,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzM4NCIsIm5vbmNlIjoiQmpvUEd4MXdTc1ZTUS1mTS1TVmpOdyIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9zaWduLW1lLXVwIiwiandrIjp7ImNydiI6IlAtMzg0Iiwia3R5IjoiRUMiLCJ4IjoiQXlXcUttek9sSGFxR2pYZ2hzcWNNQ1Y3U0ZqYU5DeXpacWhxcFgyRlFTMEg2MXBGZlltRGtuZndVTDF3b1JURCIsInkiOiJ2VnAwblhyTjZMdGkteVFma3hodGJ6WmhrTThtbWM1LUhlVGY4TE9mU2c0SV9QbEtTODF1cWdrdW9WdzY4dHJWIn19","payload":"eyJjb250YWN0IjpbIm1haWx0bzppbmZvQGV4YW1wbGUuY29tIl0sInRlcm1zT2ZTZXJ2aWNlQWdyZWVkIjp0cnVlfQ","signature":"aLQuJR9XxuEQYCi3aQtMRTRzXAPBz4pG_zSE8tb1PE9d4wUbmUXB6aK7aH1JWMoDfARuPr3Z7DvUi6BDHtnB4eBYu_IT_etc73318an3WNUICPzkBuGVVZm3oo9Ru2v3"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -120,6 +120,6 @@ http_interactions:
               "y": "vVp0nXrN6Lti-yQfkxhtbzZhkM8mmc5-HeTf8LOfSg4I_PlKS81uqgkuoVw68trV"
            }
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:14 GMT
 recorded_with: VCR 2.9.3

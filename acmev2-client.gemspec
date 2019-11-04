@@ -1,10 +1,10 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'acme/client/version'
+require 'acmev2/client/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'acme-client'
-  spec.version       = Acme::Client::VERSION
+  spec.version       = AcmeV2::Client::VERSION
   spec.authors       = ['Charles Barbier']
   spec.email         = ['unixcharles@gmail.com']
   spec.summary       = 'Client for the ACME protocol.'

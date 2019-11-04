@@ -35,7 +35,7 @@ module SSLHelper
     def generate_ecdsa_key(curve)
       k = OpenSSL::PKey::EC.new(curve)
       k.generate_key
-      Acme::Client::CertificateRequest::ECKeyPatch.new(k)
+      AcmeV2::Client::CertificateRequest::ECKeyPatch.new(k)
     end
 
     private
@@ -46,7 +46,7 @@ module SSLHelper
           begin
             OpenSSL::PKey::RSA.new(pem)
           rescue StandardError
-            Acme::Client::CertificateRequest::ECKeyPatch.new(pem)
+            AcmeV2::Client::CertificateRequest::ECKeyPatch.new(pem)
           end
         end
       else
@@ -77,7 +77,7 @@ module SSLHelper
       ]
     )
 
-    Acme::Client::Util.set_public_key(request, private_key)
+    AcmeV2::Client::Util.set_public_key(request, private_key)
     request.sign(private_key, OpenSSL::Digest::SHA256.new)
     request
   end

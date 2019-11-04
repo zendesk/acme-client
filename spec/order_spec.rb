@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe Acme::Client::Resources::Order do
+describe AcmeV2::Client::Resources::Order do
   let(:private_key) { generate_private_key }
   let(:unregistered_client) do
-    client = Acme::Client.new(private_key: private_key, directory: DIRECTORY_URL)
+    client = AcmeV2::Client.new(private_key: private_key, directory: DIRECTORY_URL)
     client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
     client
   end
 
   let(:client) do
-    client = Acme::Client.new(private_key: private_key, directory: DIRECTORY_URL)
+    client = AcmeV2::Client.new(private_key: private_key, directory: DIRECTORY_URL)
     client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
     client
   end
@@ -29,8 +29,8 @@ describe Acme::Client::Resources::Order do
     let(:challenge) { authorization.http01 }
 
     it 'call client finalize failure', vcr: { cassette_name: 'order_finalize_fail' } do
-      csr = Acme::Client::CertificateRequest.new(names: %w[example.com])
-      expect { order.finalize(csr: csr) }.to raise_error(Acme::Client::Error::Unauthorized)
+      csr = AcmeV2::Client::CertificateRequest.new(names: %w[example.com])
+      expect { order.finalize(csr: csr) }.to raise_error(AcmeV2::Client::Error::Unauthorized)
     end
 
     it 'call client finalize sucess', vcr: { cassette_name: 'order_finalize_sucess' } do
@@ -38,7 +38,7 @@ describe Acme::Client::Resources::Order do
         challenge.request_validation
       end
 
-      csr = Acme::Client::CertificateRequest.new(names: %w[example.com])
+      csr = AcmeV2::Client::CertificateRequest.new(names: %w[example.com])
       expect { order.finalize(csr: csr) }.not_to raise_error
     end
   end
@@ -52,7 +52,7 @@ describe Acme::Client::Resources::Order do
         challenge.request_validation
       end
 
-      csr = Acme::Client::CertificateRequest.new(names: %w[example.com])
+      csr = AcmeV2::Client::CertificateRequest.new(names: %w[example.com])
       order.finalize(csr: csr)
       order.reload
       certificate = order.certificate
@@ -61,7 +61,7 @@ describe Acme::Client::Resources::Order do
     end
 
     it 'call client certificate fail', vcr: { cassette_name: 'order_certificate_download_fail' } do
-      expect { order.certificate }.to raise_error(Acme::Client::Error::CertificateNotReady)
+      expect { order.certificate }.to raise_error(AcmeV2::Client::Error::CertificateNotReady)
     end
   end
 
@@ -75,7 +75,7 @@ describe Acme::Client::Resources::Order do
   context 'authorizations' do
     it 'load authorizations', vcr: { cassette_name: 'order_authorizations' } do
       authorizations = order.authorizations
-      expect(authorizations).to all(be_a(Acme::Client::Resources::Authorization))
+      expect(authorizations).to all(be_a(AcmeV2::Client::Resources::Authorization))
     end
   end
 end

@@ -3,7 +3,7 @@
 require 'bundler/setup'
 require 'acme-client'
 
-version = Acme::Client::VERSION
+version = AcmeV2::Client::VERSION
 
 def `(command)
   puts super(command)

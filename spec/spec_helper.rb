@@ -6,7 +6,7 @@ require 'openssl'
 DIRECTORY_URL = ENV['ACME_DIRECTORY_URL'] || 'https://127.0.0.1/directory'
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
-require 'acme/client'
+require 'acmev2/client'
 
 require 'rspec'
 require 'vcr'

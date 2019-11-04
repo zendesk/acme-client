@@ -9,22 +9,22 @@ require 'base64'
 require 'time'
 require 'uri'
 
-module Acme; end
-class Acme::Client; end
+module AcmeV2; end
+class AcmeV2::Client; end
 
-require 'acme/client/version'
-require 'acme/client/certificate_request'
-require 'acme/client/self_sign_certificate'
-require 'acme/client/resources'
-require 'acme/client/faraday_middleware'
-require 'acme/client/jwk'
-require 'acme/client/error'
-require 'acme/client/util'
+require 'acmev2/client/version'
+require 'acmev2/client/certificate_request'
+require 'acmev2/client/self_sign_certificate'
+require 'acmev2/client/resources'
+require 'acmev2/client/faraday_middleware'
+require 'acmev2/client/jwk'
+require 'acmev2/client/error'
+require 'acmev2/client/util'
 
-class Acme::Client
+class AcmeV2::Client
   DEFAULT_DIRECTORY = 'http://127.0.0.1:4000/directory'.freeze
   repo_url = 'https://github.com/unixcharles/acme-client'
-  USER_AGENT = "Acme::Client v#{Acme::Client::VERSION} (#{repo_url})".freeze
+  USER_AGENT = "AcmeV2::Client v#{AcmeV2::Client::VERSION} (#{repo_url})".freeze
   CONTENT_TYPES = {
     pem: 'application/pem-certificate-chain'
   }
@@ -37,12 +37,12 @@ class Acme::Client
     @jwk = if jwk
       jwk
     else
-      Acme::Client::JWK.from_private_key(private_key)
+      AcmeV2::Client::JWK.from_private_key(private_key)
     end
 
     @kid, @connection_options = kid, connection_options
     @bad_nonce_retry = bad_nonce_retry
-    @directory = Acme::Client::Resources::Directory.new(URI(directory), @connection_options)
+    @directory = AcmeV2::Client::Resources::Directory.new(URI(directory), @connection_options)
     @nonces ||= []
   end
 
@@ -64,7 +64,7 @@ class Acme::Client
       account
     else
       arguments = attributes_from_account_response(response)
-      Acme::Client::Resources::Account.new(self, url: @kid, **arguments)
+      AcmeV2::Client::Resources::Account.new(self, url: @kid, **arguments)
     end
   end
 
@@ -75,13 +75,13 @@ class Acme::Client
 
     response = post(kid, payload: payload)
     arguments = attributes_from_account_response(response)
-    Acme::Client::Resources::Account.new(self, url: kid, **arguments)
+    AcmeV2::Client::Resources::Account.new(self, url: kid, **arguments)
   end
 
   def account_deactivate
     response = post(kid, payload: { status: 'deactivated' })
     arguments = attributes_from_account_response(response)
-    Acme::Client::Resources::Account.new(self, url: kid, **arguments)
+    AcmeV2::Client::Resources::Account.new(self, url: kid, **arguments)
   end
 
   def account
@@ -92,7 +92,7 @@ class Acme::Client
 
     response = post_as_get(@kid)
     arguments = attributes_from_account_response(response)
-    Acme::Client::Resources::Account.new(self, url: @kid, **arguments)
+    AcmeV2::Client::Resources::Account.new(self, url: @kid, **arguments)
   end
 
   def kid
@@ -107,13 +107,13 @@ class Acme::Client
 
     response = post(endpoint_for(:new_order), payload: payload)
     arguments = attributes_from_order_response(response)
-    Acme::Client::Resources::Order.new(self, **arguments)
+    AcmeV2::Client::Resources::Order.new(self, **arguments)
   end
 
   def order(url:)
     response = post_as_get(url)
     arguments = attributes_from_order_response(response)
-    Acme::Client::Resources::Order.new(self, **arguments.merge(url: url))
+    AcmeV2::Client::Resources::Order.new(self, **arguments.merge(url: url))
   end
 
   def finalize(url:, csr:)
@@ -121,10 +121,10 @@ class Acme::Client
       raise ArgumentError, 'csr must respond to `#to_der`'
     end
 
-    base64_der_csr = Acme::Client::Util.urlsafe_base64(csr.to_der)
+    base64_der_csr = AcmeV2::Client::Util.urlsafe_base64(csr.to_der)
     response = post(url, payload: { csr: base64_der_csr })
     arguments = attributes_from_order_response(response)
-    Acme::Client::Resources::Order.new(self, **arguments)
+    AcmeV2::Client::Resources::Order.new(self, **arguments)
   end
 
   def certificate(url:)
@@ -135,25 +135,25 @@ class Acme::Client
   def authorization(url:)
     response = post_as_get(url)
     arguments = attributes_from_authorization_response(response)
-    Acme::Client::Resources::Authorization.new(self, url: url, **arguments)
+    AcmeV2::Client::Resources::Authorization.new(self, url: url, **arguments)
   end
 
   def deactivate_authorization(url:)
     response = post(url, payload: { status: 'deactivated' })
     arguments = attributes_from_authorization_response(response)
-    Acme::Client::Resources::Authorization.new(self, url: url, **arguments)
+    AcmeV2::Client::Resources::Authorization.new(self, url: url, **arguments)
   end
 
   def challenge(url:)
     response = post_as_get(url)
     arguments = attributes_from_challenge_response(response)
-    Acme::Client::Resources::Challenges.new(self, **arguments)
+    AcmeV2::Client::Resources::Challenges.new(self, **arguments)
   end
 
   def request_challenge_validation(url:, key_authorization: nil)
     response = post(url, payload: {})
     arguments = attributes_from_challenge_response(response)
-    Acme::Client::Resources::Challenges.new(self, **arguments)
+    AcmeV2::Client::Resources::Challenges.new(self, **arguments)
   end
 
   def revoke(certificate:, reason: nil)
@@ -163,7 +163,7 @@ class Acme::Client
       OpenSSL::X509::Certificate.new(certificate).to_der
     end
 
-    base64_der_certificate = Acme::Client::Util.urlsafe_base64(der_certificate)
+    base64_der_certificate = AcmeV2::Client::Util.urlsafe_base64(der_certificate)
     payload = { certificate: base64_der_certificate }
     payload[:reason] = reason unless reason.nil?
 
@@ -288,7 +288,7 @@ class Acme::Client
 
   def new_acme_connection(endpoint:, mode:)
     new_connection(endpoint: endpoint) do |configuration|
-      configuration.use Acme::Client::FaradayMiddleware, client: self, mode: mode
+      configuration.use AcmeV2::Client::FaradayMiddleware, client: self, mode: mode
     end
   end
 
@@ -298,7 +298,7 @@ class Acme::Client
         configuration.request(:retry,
           max: @bad_nonce_retry,
           methods: Faraday::Connection::METHODS,
-          exceptions: [Acme::Client::Error::BadNonce])
+          exceptions: [AcmeV2::Client::Error::BadNonce])
       end
       yield(configuration) if block_given?
       configuration.adapter Faraday.default_adapter

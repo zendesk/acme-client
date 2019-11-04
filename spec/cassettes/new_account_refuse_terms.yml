@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -39,7 +39,7 @@ http_interactions:
            "newOrder": "<DIRECTORY_BASE_URL>/order-plz",
            "revokeCert": "<DIRECTORY_BASE_URL>/revoke-cert"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:16 GMT
 - request:
     method: head
@@ -49,7 +49,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Accept:
       - "*/*"
   response:
@@ -68,7 +68,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:16 GMT
 - request:
     method: post
@@ -78,7 +78,7 @@ http_interactions:
       string: '{"protected":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIm5vbmNlIjoiZmxsQVdhMmhjb3hXd19WMmk1eVkyUSIsInVybCI6Imh0dHBzOi8vMTkyLjE2OC41Ni45MzoxNDAwMC9zaWduLW1lLXVwIiwiandrIjp7ImUiOiJBUUFCIiwia3R5IjoiUlNBIiwibiI6Ind6WG1pbWJ3cElfdFhva2lqNTNpNTlvYVRTTks2QnVPLWt0cDhwLXFBVG1YanBUdUxFRUF6WVFxVVIyUncwZmJ6TG13bk1qazFLVFJ1azZjdllFREhJd1VFdUU4Y2VUaVg5THdnTzBzenpLemNMMGdtZERDZnc1WVFfcjRlenJ0VC0wTmlMdEdkT2JLZEZ1b1VGN0UtUzk4UC1OOW0yZU5CSU1xVDdXQmw1RVRPeFh6OTRjUXhHNy13aFhhWEdlMUdpM3V6SGlxaHVBcTVZd1YyX1JROW0xd2VxUmdpbUV5NGc3NzNOSXpTMTZQOTMxRW04alFLYTRSQVBZWHY5SVVyOC1VMVpydVVTUWk4WGQzZnBNYVhhMnBYREtXWjc5dnM4UDBycVFpMFBCZ0tLaXBRQ1lXZS1pVDljMlh6YUR0WE1MSzVWUEY3dTNDLWowLUlkaXRDUSJ9fQ","payload":"eyJjb250YWN0IjpbIm1haWx0bzppbmZvQGV4YW1wbGUuY29tIl19","signature":"WmC99gSTvwIILpo7vzgQX6RY15lQrwQ5_GiqLJWkI7yPpnDjFM7RzTg-fdDIdEBKUO_SmZquyq6DeWTGeK5Sv05pa35TzY7RG8KeUVUBn2TtNmvksBvufvzzSZkZtwyiYOpaGS9wtmVyl5K92trzgQKfEbhbmkX1G2C48FErcIPASExxRXGrO7Ow8xKVWqIjNzdIcB_xaNIF6cqoDIaQT0QbtCLcMDum732CWbGtGfyNcbXwzFfu5g9X2qUSCs6YsNa1ScljowKLFAxf-fa8F7ztkUkAUh68LS-oNY2MkXjYHdwtmXZTMlC46nPUz8yoAExlewpeKPrJBWEsY_mY5g"}'
     headers:
       User-Agent:
-      - Acme::Client v2.0.4 (https://github.com/unixcharles/acme-client)
+      - AcmeV2::Client v2.0.4 (https://github.com/unixcharles/acme-client)
       Content-Type:
       - application/jose+json
       Accept-Encoding:
@@ -111,6 +111,6 @@ http_interactions:
            "detail": "Provided account did not agree to the terms of service",
            "status": 403
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Oct 2019 03:08:16 GMT
 recorded_with: VCR 2.9.3

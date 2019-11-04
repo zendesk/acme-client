@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Acme::Client::Resources::Challenges::Base
+class AcmeV2::Client::Resources::Challenges::Base
   attr_reader :status, :url, :token, :error
 
   def initialize(client, **arguments)

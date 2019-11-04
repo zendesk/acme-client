@@ -1,4 +1,4 @@
-# Acme::Client
+# AcmeV2::Client
 
 [![Build Status](https://travis-ci.org/unixcharles/acme-client.svg?branch=master)](https://travis-ci.org/unixcharles/acme-client)
 
@@ -63,13 +63,13 @@ See [RSA](https://ruby.github.io/openssl/OpenSSL/PKey/RSA.html) and [EC](https:/
 
 
 ```ruby
-client = Acme::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
+client = AcmeV2::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
 ```
 
 If your account is already registered, you can save some API calls by passing your key ID directly. This will avoid an unnecessary API call to retrieve it from your private key.
 
 ```ruby
-client = Acme::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory', kid: 'https://example.com/acme/acct/1')
+client = AcmeV2::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory', kid: 'https://example.com/acme/acct/1')
 ```
 
 ## Account management
@@ -77,14 +77,14 @@ client = Acme::Client.new(private_key: private_key, directory: 'https://acme-sta
 Accounts are tied to a private key. Before being allowed to create orders, the account must be registered and the ToS accepted using the private key. The account will be assigned a key ID.
 
 ```ruby
-client = Acme::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
+client = AcmeV2::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
 account = client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
 ```
 
 After the registration you can retrieve the account  key indentifier (kid).
 
 ```ruby
-client = Acme::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
+client = AcmeV2::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
 account = client.new_account(contact: 'mailto:info@example.com', terms_of_service_agreed: true)
 account.kid # => <kid string>
 ```
@@ -92,7 +92,7 @@ account.kid # => <kid string>
 If you already have an existing account (for example one created in ACME v1) please note that unless the `kid` is provided at initialization, the client will lazy load the `kid` by doing a `POST` to `newAccount` whenever the `kid` is required. Therefore, you can easily get your `kid` for an existing account and (if needed) store it for reuse:
 
 ```
-client = Acme::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
+client = AcmeV2::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
 
 # kid is not set, therefore a call to newAccount is made to lazy-initialize the kid
 client.kid
@@ -175,12 +175,12 @@ challenge.status # => 'valid'
 
 Once all required authorizations have been validated through challenges, the order can be finalized using a CSR ([Certificate Signing Request](https://en.wikipedia.org/wiki/Certificate_signing_request)).
 
-A CSR can be slightly tricky to generate using OpenSSL from Ruby standard library. `acme-client` provide a utility class `CertificateRequest` to help with that. You'll need to use a different private key for the certificate request than the one you use for your `Acme::Client` account.
+A CSR can be slightly tricky to generate using OpenSSL from Ruby standard library. `acme-client` provide a utility class `CertificateRequest` to help with that. You'll need to use a different private key for the certificate request than the one you use for your `AcmeV2::Client` account.
 
 Certificate generation happens asynchronously. You may need to poll.
 
 ```ruby
-csr = Acme::Client::CertificateRequest.new(private_key: a_different_private_key, subject: { common_name: 'example.com' })
+csr = AcmeV2::Client::CertificateRequest.new(private_key: a_different_private_key, subject: { common_name: 'example.com' })
 order.finalize(csr: csr)
 while order.status == 'processing'
   sleep(1)
