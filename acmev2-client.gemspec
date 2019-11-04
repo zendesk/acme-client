@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'acmev2/client/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'acme-client'
+  spec.name          = 'acmev2-client'
   spec.version       = AcmeV2::Client::VERSION
   spec.authors       = ['Charles Barbier']
   spec.email         = ['unixcharles@gmail.com']
