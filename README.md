@@ -23,7 +23,7 @@ gem 'acme-client'
 ```
 
 ## Usage
-- [Acme::Client](#acmeclient)
+- [AcmeV2::Client](#acmeclient)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Setting up a client](#setting-up-a-client)
@@ -207,12 +207,12 @@ For example, to download the cross-signed certificate after January 11, 2021, ca
 ```ruby
 begin
   order.certificate(force_chain: 'DST Root CA X3')
-rescue Acme::Client::Error::ForcedChainNotFound
+rescue AcmeV2::Client::Error::ForcedChainNotFound
   order.certificate
 end
 ```
 
-Note: if the specified forced chain doesn't match an existing alternative certificate the method will raise an `Acme::Client::Error::ForcedChainNotFound` error.
+Note: if the specified forced chain doesn't match an existing alternative certificate the method will raise an `AcmeV2::Client::Error::ForcedChainNotFound` error.
 
 Learn more about the original Github issue for this client [here](https://github.com/unixcharles/acme-client/issues/186), information from Let's Encrypt [here](https://letsencrypt.org/2019/04/15/transitioning-to-isrg-root.html), and cross-signing [here](https://letsencrypt.org/certificates/#cross-signing).
 

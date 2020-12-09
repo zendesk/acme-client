@@ -20,7 +20,7 @@ require 'acmev2/client/faraday_middleware'
 require 'acmev2/client/jwk'
 require 'acmev2/client/error'
 require 'acmev2/client/util'
-require 'acme/client/chain_identifier'
+require 'acmev2/client/chain_identifier'
 
 class AcmeV2::Client
   DEFAULT_DIRECTORY = 'http://127.0.0.1:4000/directory'.freeze
@@ -145,7 +145,7 @@ class AcmeV2::Client
       end
     end
 
-    raise Acme::Client::Error::ForcedChainNotFound, "Could not find any matching chain for `#{force_chain}`"
+    raise AcmeV2::Client::Error::ForcedChainNotFound, "Could not find any matching chain for `#{force_chain}`"
   end
 
   def authorization(url:)

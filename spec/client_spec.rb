@@ -252,7 +252,7 @@ describe AcmeV2::Client do
             finalized_order = client.order(url: order.url)
             expect {
               client.certificate(url: finalized_order.certificate_url, force_chain: 'foobar')
-            }.to raise_error(Acme::Client::Error::ForcedChainNotFound)
+            }.to raise_error(AcmeV2::Client::Error::ForcedChainNotFound)
           end
         end
 
@@ -279,7 +279,7 @@ describe AcmeV2::Client do
             finalized_order = client.order(url: order.url)
             expect {
               client.certificate(url: finalized_order.certificate_url, force_chain: 'foobar')
-            }.to raise_error(Acme::Client::Error::ForcedChainNotFound)
+            }.to raise_error(AcmeV2::Client::Error::ForcedChainNotFound)
           end
         end
       end

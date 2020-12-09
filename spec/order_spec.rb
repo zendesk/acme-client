@@ -78,7 +78,7 @@ describe AcmeV2::Client::Resources::Order do
 
       expect {
         finalized_order.certificate(force_chain: force_chain_name)
-      }.to raise_error(Acme::Client::Error::ForcedChainNotFound)
+      }.to raise_error(AcmeV2::Client::Error::ForcedChainNotFound)
     end
   end
 

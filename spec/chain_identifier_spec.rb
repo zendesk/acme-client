@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Acme::Client::ChainIdentifier do
+describe AcmeV2::Client::ChainIdentifier do
   let(:pem) { open('./spec/fixtures/certificate_chain.pem').read }
   let(:issuer_name) { 'Pebble Root CA' }
 
-  subject { Acme::Client::ChainIdentifier.new(pem) }
+  subject { AcmeV2::Client::ChainIdentifier.new(pem) }
   it 'matches certificate by name' do
     expect(subject).to be_a_match_name(issuer_name)
   end
