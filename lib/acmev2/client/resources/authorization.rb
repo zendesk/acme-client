@@ -5,7 +5,7 @@ class AcmeV2::Client::Resources::Authorization
 
   def initialize(client, **arguments)
     @client = client
-    assign_attributes(arguments)
+    assign_attributes(**arguments)
   end
 
   def deactivate

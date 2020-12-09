@@ -1,3 +1,12 @@
+## `2.0.7`
+
+* Add support for alternate certificate chain
+* Change `Link` headers parsing to return array of value. This add support multiple entries at the same `rel`
+
+## `2.0.6`
+
+* Allow Faraday up to `< 2.0`
+
 ## `2.0.5`
 
 * Use post-as-get

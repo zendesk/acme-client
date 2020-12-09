@@ -5,7 +5,7 @@ class AcmeV2::Client::Resources::Challenges::Base
 
   def initialize(client, **arguments)
     @client = client
-    assign_attributes(arguments)
+    assign_attributes(**arguments)
   end
 
   def challenge_type
