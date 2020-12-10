@@ -23,17 +23,26 @@ gem 'acme-client'
 ```
 
 ## Usage
-* [Setting up a client](#setting-up-a-client)
-* [Account management](#account-management)
-* [Obtaining a certificate](#obtaining-a-certificate)
-  * [Ordering a certificate](#ordering-a-certificate)
-  * [Completing an HTTP challenge](#preparing-for-http-challenge)
-  * [Completing an DNS challenge](#preparing-for-dns-challenge)
-  * [Requesting a challenge verification](#requesting-a-challenge-verification)
-  * [Downloading a certificate](#downloading-a-certificate)
-* [Extra](#extra)
-  * [Certificate revokation](#certificate-revokation)
-  * [Certificate renewal](#certificate-renewal)
+- [AcmeV2::Client](#acmeclient)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Setting up a client](#setting-up-a-client)
+  - [Account management](#account-management)
+  - [Obtaining a certificate](#obtaining-a-certificate)
+    - [Ordering a certificate](#ordering-a-certificate)
+    - [Preparing for HTTP challenge](#preparing-for-http-challenge)
+    - [Preparing for DNS challenge](#preparing-for-dns-challenge)
+    - [Requesting a challenge verification](#requesting-a-challenge-verification)
+    - [Downloading a certificate](#downloading-a-certificate)
+    - [Ordering an alternative certificate](#ordering-an-alternative-certificate)
+  - [Extra](#extra)
+    - [Certificate revokation](#certificate-revokation)
+    - [Certificate renewal](#certificate-renewal)
+  - [Not implemented](#not-implemented)
+  - [Requirements](#requirements)
+  - [Development](#development)
+  - [Pull request?](#pull-request)
+  - [License](#license)
 
 ## Setting up a client
 
@@ -93,6 +102,7 @@ If you already have an existing account (for example one created in ACME v1) ple
 
 ```
 client = AcmeV2::Client.new(private_key: private_key, directory: 'https://acme-staging-v02.api.letsencrypt.org/directory')
+
 
 # kid is not set, therefore a call to newAccount is made to lazy-initialize the kid
 client.kid
@@ -184,10 +194,27 @@ csr = AcmeV2::Client::CertificateRequest.new(private_key: a_different_private_ke
 order.finalize(csr: csr)
 while order.status == 'processing'
   sleep(1)
-  challenge.reload
+  order.reload
 end
 order.certificate # => PEM-formatted certificate
 ```
+
+### Ordering an alternative certificate
+
+Let's Encrypt is [transitioning](https://letsencrypt.org/2019/04/15/transitioning-to-isrg-root.html) to use a new intermediate certificate. Starting January 11, 2021 new certificates will be signed by their own intermediate. To ease the transition on clients Let's Encrypt will continue signing an alternative version of the certificate using the old, cross-signed intermediate until September 29, 2021. In order to utilize an alternative certificate the `Order#certificate` method accepts a `force_chain` keyword argument, which takes the issuer name of the intermediate certificate.
+For example, to download the cross-signed certificate after January 11, 2021, call `Order#certificate` as follows:
+
+```ruby
+begin
+  order.certificate(force_chain: 'DST Root CA X3')
+rescue AcmeV2::Client::Error::ForcedChainNotFound
+  order.certificate
+end
+```
+
+Note: if the specified forced chain doesn't match an existing alternative certificate the method will raise an `AcmeV2::Client::Error::ForcedChainNotFound` error.
+
+Learn more about the original Github issue for this client [here](https://github.com/unixcharles/acme-client/issues/186), information from Let's Encrypt [here](https://letsencrypt.org/2019/04/15/transitioning-to-isrg-root.html), and cross-signing [here](https://letsencrypt.org/certificates/#cross-signing).
 
 ## Extra
 
@@ -201,7 +228,7 @@ client.revoke(certificate: certificate)
 
 ### Certificate renewal
 
-The is no renewal process, just create a new order.
+There is no renewal process, just create a new order.
 
 
 ## Not implemented
@@ -227,4 +254,3 @@ Yes.
 ## License
 
 [MIT License](http://opensource.org/licenses/MIT)
-

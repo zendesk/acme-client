@@ -20,6 +20,7 @@ require 'acmev2/client/faraday_middleware'
 require 'acmev2/client/jwk'
 require 'acmev2/client/error'
 require 'acmev2/client/util'
+require 'acmev2/client/chain_identifier'
 
 class AcmeV2::Client
   DEFAULT_DIRECTORY = 'http://127.0.0.1:4000/directory'.freeze
@@ -127,9 +128,24 @@ class AcmeV2::Client
     AcmeV2::Client::Resources::Order.new(self, **arguments)
   end
 
-  def certificate(url:)
+  def certificate(url:, force_chain: nil)
     response = download(url, format: :pem)
-    response.body
+    pem = response.body
+
+    return pem if force_chain.nil?
+
+    return pem if ChainIdentifier.new(pem).match_name?(force_chain)
+
+    alternative_urls = Array(response.headers.dig('link', 'alternate'))
+    alternative_urls.each do |alternate_url|
+      response = download(alternate_url, format: :pem)
+      pem = response.body
+      if ChainIdentifier.new(pem).match_name?(force_chain)
+        return pem
+      end
+    end
+
+    raise AcmeV2::Client::Error::ForcedChainNotFound, "Could not find any matching chain for `#{force_chain}`"
   end
 
   def authorization(url:)
